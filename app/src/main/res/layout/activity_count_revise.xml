@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <EditText
+        android:id="@+id/et_count_0"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:hint="需要修改的id:"
+        android:textColor="#FFAD33"
+        android:textSize="15sp"
+        android:background="@drawable/user_name"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:drawablePadding="5dp"
+        android:maxLines="1"
+        android:layout_marginTop="10dp"
+        />
+    <EditText
+        android:id="@+id/et_count_gaikind"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:hint="需要修改的类别:"
+        android:textColor="#FFAD33"
+        android:textSize="15sp"
+        android:background="@drawable/user_name"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:drawablePadding="5dp"
+        android:maxLines="1"
+        android:layout_marginTop="10dp"
+        />
+    <EditText
+        android:id="@+id/et_count_1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:hint="修改后的数据:"
+        android:textColor="#FFAD33"
+        android:textSize="15sp"
+        android:background="@drawable/user_name"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:drawablePadding="5dp"
+        android:maxLines="1"
+        android:layout_marginTop="10dp"
+        />
+    <Button
+        android:id="@+id/btn_count_revise1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/anliu_1"
+        android:hint="修改"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp" />
+
+</LinearLayout>

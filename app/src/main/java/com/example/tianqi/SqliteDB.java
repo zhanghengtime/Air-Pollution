@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Peter on 2018/6/8.
- */
-
 public class SqliteDB {
     /**
      * 数据库名
@@ -32,10 +28,6 @@ public class SqliteDB {
         db = dbHelper.getWritableDatabase();
     }
 
-    /**
-     * 获取SqliteDB实例
-     * @param context
-     */
     public synchronized static SqliteDB getInstance(Context context) {
         if (sqliteDB == null) {
             sqliteDB = new SqliteDB(context);

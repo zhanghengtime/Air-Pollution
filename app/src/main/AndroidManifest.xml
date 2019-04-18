@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".SignActivity" />
         <activity android:name=".AdminActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".FindActivity"/>
     </application>
 
 </manifest>

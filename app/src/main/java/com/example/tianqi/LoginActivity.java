@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
                 String pass=etPasswd.getText().toString().trim();
                 int result=SqliteDB.getInstance(getApplicationContext()).Quer(pass,name);
                 if (result==2) {
-                    Toast.makeText(LoginActivity.this,"管理员登录！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"管理员登录！",Toast.LENGTH_SHORT).show();   //管理员 root 12345
                     Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
                     startActivity(intent);
                     finish();
@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
                 else if (result==1)
                 {
                     Toast.makeText(LoginActivity.this,"登录成功！",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, SignActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }

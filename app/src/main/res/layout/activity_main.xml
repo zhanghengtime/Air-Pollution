@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <Button
+        android:id="@+id/btn_main_read"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/anliu_1"
+        android:hint="数据读入"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_main_find"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/anliu_1"
+        android:hint="数据查询"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:layout_marginTop="25dp"/>
+
+    <Button
+        android:id="@+id/btn_main_manage"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/anliu_1"
+        android:hint="数据管理"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:layout_marginTop="25dp"/>
+
+    <Button
+        android:id="@+id/btn_main_count"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/anliu_1"
+        android:hint="污染物统计"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:layout_marginTop="25dp"/>
+
+    <Button
+        android:id="@+id/btn_main_warn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/anliu_1"
+        android:hint="污染物预警"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:layout_marginTop="25dp"/>
+
+    <Button
+        android:id="@+id/btn_main_map"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/anliu_1"
+        android:hint="地图模式"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:layout_marginTop="25dp"/>
+
+    <Button
+        android:id="@+id/btn_main_esc"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/anliu_1"
+        android:hint="退出"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:layout_marginTop="25dp"/>
+
+</LinearLayout>

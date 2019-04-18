@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinnername">
+        <item>AQI</item>
+        <item>PM10</item>
+        <item>PM25</item>
+        <item>SO2</item>
+        <item>NO2</item>
+        <item>O3</item>
+        <item>CO</item>
+        <item>温度</item>
+        <item>湿度</item>
+        <item>首要污染物</item>
+    </string-array>
+</resources>
