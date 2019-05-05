@@ -41,6 +41,7 @@
         android:layout_height="wrap_content">
         <TextView android:text="区县 ："
             android:layout_width="wrap_content"
+            android:textSize="15sp"
             android:layout_height="wrap_content"
             android:padding="3dip" />
         <EditText android:id="@+id/et_count_qvxian"
@@ -84,6 +85,7 @@
     </LinearLayout>
     <TextView android:id="@+id/label001"
         android:text=" 统计结果："
+        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ScrollView android:layout_width="fill_parent"
@@ -92,6 +94,7 @@
             android:layout_height="wrap_content" android:orientation="vertical">
             <TextView android:id="@+id/display001"
                 android:text=""
+                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

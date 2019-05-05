@@ -72,31 +72,31 @@ public class FindResultActivity extends AppCompatActivity {
                             result += "经度: " + rs.getString(5) + " \n";
                             result += "纬度:" + rs.getString(6) + " \n";
                             result += "时间: " + rs.getString(7) + " \n";
+                            result += "首要污染物: " + rs.getString(15) + " \n";
+                            result += "温度: " + rs.getString(16) + " \n";
+                            result += "湿度: " + rs.getString(17) + " \n";
                             if(kind.equals("AQI")) {
-                                result += "AQI: " + rs.getString(8) + " \n";
+                                result += "AQI: " + rs.getString(8) + " \n\n";
                             }
                             else if(kind.equals("PM10"))
                             {
-                                result += "PM10: " + rs.getString(9) + " \n";
+                                result += "PM10: " + rs.getString(9) + " \n\n";
                             }
                             else if(kind.equals("PM25")) {
-                                result += "PM25: " + rs.getString(10) + " \n";
+                                result += "PM25: " + rs.getString(10) + " \n\n";
                             }
                             else if(kind.equals("SO2")) {
-                                result += "SO2: " + rs.getString(11) + " \n";
+                                result += "SO2: " + rs.getString(11) + " \n\n";
                             }
                             else if(kind.equals("NO2")) {
-                                result += "NO2: " + rs.getString(12) + " \n";
+                                result += "NO2: " + rs.getString(12) + " \n\n";
                             }
                             else if(kind.equals("O3")) {
-                                result += "O3: " + rs.getString(13) + " \n";
+                                result += "O3: " + rs.getString(13) + " \n\n";
                             }
                             else if(kind.equals("CO")) {
-                                result += "CO: " + rs.getString(14) + " \n";
+                                result += "CO: " + rs.getString(14) + " \n\n";
                             }
-                            result += "首要污染物: " + rs.getString(15) + " \n";
-                            result += "温度: " + rs.getString(16) + " \n";
-                            result += "湿度: " + rs.getString(17) + " \n\n";
                             flag++;
                         }
                        final String strr = result;

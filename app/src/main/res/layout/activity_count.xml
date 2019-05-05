@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/backback">
 
     <Button
         android:id="@+id/btn_count_add"
@@ -40,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="151dp"
+        android:layout_marginBottom="200dp"
         android:background="@drawable/anliu_1"
         android:hint="退出"
         android:textColor="#fff"

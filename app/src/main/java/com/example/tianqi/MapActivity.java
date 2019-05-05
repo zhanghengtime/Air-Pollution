@@ -2,11 +2,16 @@ package com.example.tianqi;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -24,6 +29,11 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 public class MapActivity extends AppCompatActivity {
@@ -34,11 +44,16 @@ public class MapActivity extends AppCompatActivity {
     private BaiduMap mBaiduMap;
     private double lat;
     private double lon;
+    private TextView displayView;
+    private static Handler handler=new Handler();
+    private Button map_find;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_map);
+        map_find = (Button)findViewById(R.id.btn_map_find);
+        displayView = (TextView)findViewById(R.id.map_results);
 //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.bmapView);
 //获取BaiduMap对象
@@ -74,7 +89,61 @@ public class MapActivity extends AppCompatActivity {
         }
         mLocationClient.start();
 //开始定位
-
+        map_find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new  Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try{
+                            Class.forName("com.mysql.jdbc.Driver");
+                            String url="jdbc:mysql://192.168.56.1:3306/db_pollution?characterEncoding=UTF-8";
+                            Connection conn = DriverManager.getConnection(url,"root","");
+                            if(conn!=null){
+                                Log.d("调试","连接成功");
+                                Statement stmt = conn.createStatement();
+                                String sql = "SELECT * FROM pollution WHERE ABS("+lon+"-经度)<10 AND ABS("+lat+"-0.1)<10  ";
+                                ResultSet rs = stmt.executeQuery(sql);
+                                String result="";
+                                while(rs.next()) {
+                                    result += "经度: " + rs.getString(5) + " \n";
+                                    result += "纬度:" + rs.getString(6) + " \n";
+                                    result += "首要污染物: " + rs.getString(15) + " \n";
+                                    result += "温度: " + rs.getString(16) + " \n";
+                                    result += "湿度: " + rs.getString(17) + " \n";
+                                    result += "AQI: " + rs.getString(8) + " \n";
+                                    result += "PM10: " + rs.getString(9) + " \n";
+                                    result += "PM25: " + rs.getString(10) + " \n";
+                                    result += "SO2: " + rs.getString(11) + " \n";
+                                    result += "NO2: " + rs.getString(12) + " \n";
+                                    result += "O3: " + rs.getString(13) + " \n";
+                                    result += "CO: " + rs.getString(14) + " \n\n";
+                                }
+                                final String strr = result;
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        displayView.setText(strr);
+                                    }
+                                });
+                            }else{
+                                Log.d("调试","连接失败");
+                            }
+                        }catch (ClassNotFoundException e){
+                            e.printStackTrace();
+                        }catch (SQLException e){
+                            Log.i("debug",Log.getStackTraceString(e));
+                            final String str =   e.toString();
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    displayView.setText(str);
+                                }});
+                        }
+                    }
+                }).start();
+            }
+        });
 
     }
     /**
