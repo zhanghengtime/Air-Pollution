@@ -1,6 +1,7 @@
 package com.example.tianqi;
 
 //用来添加
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class AddActivity extends AppCompatActivity {
     private EditText etCount1;
@@ -30,7 +33,9 @@ public class AddActivity extends AppCompatActivity {
     private EditText etCount17;
     private Button mBtnadd;
     private Button mEsc;
+    private Dialog dateDialog;
     private static Handler handler=new Handler();
+    private String eTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +115,12 @@ public class AddActivity extends AppCompatActivity {
                 }).start();
             }
         });
+        etCount7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateDialog(DateUtil.getDateForString("2019-05-04"));
+            }
+        });
         mEsc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,5 +129,28 @@ public class AddActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    private void showDateDialog(List<Integer> date) {
+        DatePickerDialog.Builder builder = new DatePickerDialog.Builder(this);
+        builder.setOnDateSelectedListener(new DatePickerDialog.OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(int[] dates) {
+                //  2019-05-04
+                eTime=String.format("%d-%s-%s", dates[0], dates[1] > 9 ? dates[1] : ("0" + dates[1]), dates[2] > 9 ? dates[2] : ("0" + dates[2]));
+                etCount7.setText(eTime);
+            }
+            @Override
+            public void onCancel() {
+
+            }
+        })
+                .setSelectYear(date.get(0) - 1)
+                .setSelectMonth(date.get(1) - 1)
+                .setSelectDay(date.get(2) - 1);
+        builder.setMaxYear(DateUtil.getYear());
+        builder.setMaxMonth(DateUtil.getDateForString(DateUtil.getToday()).get(1));
+        builder.setMaxDay(DateUtil.getDateForString(DateUtil.getToday()).get(2));
+        dateDialog = builder.create();
+        dateDialog.show();
     }
 }

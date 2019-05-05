@@ -11,16 +11,18 @@
         <Button
             android:padding="3dip"
             android:id="@+id/btn_find_esc1"
-            android:layout_width="100dp"
+            android:layout_width="fill_parent"
             android:layout_height="48dp"
             android:layout_below="@id/btn_login"
             android:hint="退出"
             android:gravity="center"
             android:layout_gravity="center"
             android:textColorHint="#000"
+            android:shadowColor="@color/colorPrimary"
             android:textSize="15sp" />
     <TextView android:id="@+id/labelss"
         android:text=" 查询结果："
+        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ScrollView android:layout_width="fill_parent"
@@ -29,6 +31,7 @@
             android:layout_height="wrap_content" android:orientation="vertical">
             <TextView android:id="@+id/find_results"
                 android:text=""
+                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

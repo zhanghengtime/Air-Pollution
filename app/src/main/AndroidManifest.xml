@@ -35,8 +35,9 @@
     <application
         android:name="DemoApplication"
         android:allowBackup="true"
-        android:label="大气监测数据管理及污染源预警系统"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/yun"
+        android:roundIcon="@mipmap/yun"
+        android:label="大气监测系统"
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme">
@@ -60,7 +61,10 @@
         <activity android:name=".ReviseActivity" />
         <activity android:name=".DeleteActivity" />
         <activity android:name=".CountActivity"/>
-        <activity android:name=".MapActivity" />
+        <activity android:name=".MapActivity"/>
+        <service android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"/>
     </application>
 
 

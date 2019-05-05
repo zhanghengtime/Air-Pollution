@@ -55,7 +55,7 @@ public class FindResultActivity extends AppCompatActivity {
                         Statement stmt = conn.createStatement();
                         String sql = "select * from pollution " + "where 区县 =\"" + place + "\" and 时间= \"" + time +"\"";
                         //String sql = "SELECT * FROM pollution WHERE 时间=\"2018/3/1 23:00:00\"";
-                       /* final String strrr = sql;
+                      /* final String strrr = sql;
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -65,12 +65,12 @@ public class FindResultActivity extends AppCompatActivity {
                         ResultSet rs = stmt.executeQuery(sql);
                         String result="";
                         while(rs.next()&&flag<=10) {
-                            result += "站点名称：" + rs.getString(1)+ "， ";
+                            result += "站点名称：" + rs.getString(1)+ " \n";
                             result += "设备类型：" + rs.getString(2) + " \n";
-                            result += "源类型：" + rs.getString(3) + "， ";
-                            result += "区县: " + rs.getString(4) + ", ";
-                            result += "经度: " + rs.getString(5) + ", \n";
-                            result += "纬度:" + rs.getString(6) + ", ";
+                            result += "源类型：" + rs.getString(3) + " \n";
+                            result += "区县: " + rs.getString(4) + " \n";
+                            result += "经度: " + rs.getString(5) + " \n";
+                            result += "纬度:" + rs.getString(6) + " \n";
                             result += "时间: " + rs.getString(7) + " \n";
                             if(kind.equals("AQI")) {
                                 result += "AQI: " + rs.getString(8) + " \n";
@@ -94,9 +94,9 @@ public class FindResultActivity extends AppCompatActivity {
                             else if(kind.equals("CO")) {
                                 result += "CO: " + rs.getString(14) + " \n";
                             }
-                            result += "首要污染物: " + rs.getString(15) + ", ";
-                            result += "温度: " + rs.getString(16) + ", ";
-                            result += "湿度: " + rs.getString(17) + ", \n\n";
+                            result += "首要污染物: " + rs.getString(15) + " \n";
+                            result += "温度: " + rs.getString(16) + " \n";
+                            result += "湿度: " + rs.getString(17) + " \n\n";
                             flag++;
                         }
                        final String strr = result;

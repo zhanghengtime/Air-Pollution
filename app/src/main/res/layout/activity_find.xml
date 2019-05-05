@@ -2,7 +2,8 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/backall">
 
     <TextView
         android:layout_width="match_parent"
@@ -29,6 +30,7 @@
         android:textColor="#000"
         android:textSize="20sp" />
 
+
     <EditText
         android:id="@+id/Time"
         android:layout_width="match_parent"
@@ -37,7 +39,7 @@
         android:layout_marginTop="173dp"
         android:background="@drawable/user_name"
         android:drawablePadding="5dp"
-        android:hint=" 时间:(如:2018/3/1 22:00:00) "
+        android:hint=" 时间 "
         android:maxLines="1"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"

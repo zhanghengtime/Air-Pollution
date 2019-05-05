@@ -1,10 +1,10 @@
 package com.example.tianqi;
 
-//用来登录活动
+//用来查询活动
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,13 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.lang.*;
-import java.sql.Statement;
+import java.util.List;
+
 
 public class FindActivity extends AppCompatActivity {
     private EditText etPlace;
@@ -27,6 +23,8 @@ public class FindActivity extends AppCompatActivity {
     private Spinner mSpinner;
     private Button mEsc;
     public String strrr;
+    private Dialog dateDialog;
+    public String eTime=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +55,12 @@ public class FindActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
-
+        etTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             showDateDialog(DateUtil.getDateForString("2019-05-04"));
+            }
+        });
         mBtnFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,5 +83,32 @@ public class FindActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    /**
+     * 显示日期
+     * @param date
+     */
+    private void showDateDialog(List<Integer> date) {
+        DatePickerDialog.Builder builder = new DatePickerDialog.Builder(this);
+        builder.setOnDateSelectedListener(new DatePickerDialog.OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(int[] dates) {
+                //  2019-05-04
+                eTime=String.format("%d-%s-%s", dates[0], dates[1] > 9 ? dates[1] : ("0" + dates[1]), dates[2] > 9 ? dates[2] : ("0" + dates[2]));
+                etTime.setText(eTime);
+            }
+            @Override
+            public void onCancel() {
+
+            }
+        })
+                .setSelectYear(date.get(0) - 1)
+                .setSelectMonth(date.get(1) - 1)
+                .setSelectDay(date.get(2) - 1);
+        builder.setMaxYear(DateUtil.getYear());
+        builder.setMaxMonth(DateUtil.getDateForString(DateUtil.getToday()).get(1));
+        builder.setMaxDay(DateUtil.getDateForString(DateUtil.getToday()).get(2));
+        dateDialog = builder.create();
+        dateDialog.show();
     }
 }

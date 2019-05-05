@@ -30,14 +30,13 @@ public class DeleteActivity extends AppCompatActivity {
                     public void run() {
                         try{
                             Class.forName("com.mysql.jdbc.Driver");
-                            String url="jdbc:mysql://192.168.56.1:3306/db_pollution?characterEncoding=UTF-8";
-                            java.sql.Connection conn = java.sql.DriverManager.getConnection(url,"root","");
+                            String url="jdbc:mysql://192.168.56.1:3306/db_pollution?characterEncoding=UTF-8";          //连接数据库
+                            java.sql.Connection conn = java.sql.DriverManager.getConnection(url,"root","");   //mysql账号名 密码
                             if(conn!=null){
                                 android.util.Log.d("调试","连接成功");
                                 java.sql.Statement stmt = conn.createStatement();
-                                String sql = "delete from pollution  where id =" +  Integer.parseInt(etshankind.getText().toString());
-                                // String sql = "SELECT * FROM pollution WHERE 时间=\"2018/3/1 23:00:00\"";
-                                stmt.executeUpdate(sql);
+                                String sql = "delete from pollution  where id =" +  Integer.parseInt(etshankind.getText().toString());  //sql语句
+                                stmt.executeUpdate(sql);   //执行sql
                                // final String strrr;
                                // strrr = sql;
                                 handler.post(new Runnable() {

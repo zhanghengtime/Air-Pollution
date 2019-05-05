@@ -14,4 +14,17 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="cancel">取消</string>
+    <string name="finish">完成</string>
+    <string name="please_select_a_province_or_city">请选择省市</string>
+    <string name="timepicker_year">年</string>
+    <string name="timepicker_month">月</string>
+    <string name="timepicker_day">日</string>
+    <string name="timepicker_hour">时</string>
+    <string name="timepicker_min">分</string>
+    <string name="timepicker_title">选择时间</string>
+    <string name="timepicker_sure">确定</string>
+    <string name="timepicker_cancel">取消</string>
+    <string name="timepicker_title_default">设置</string>
+
 </resources>
