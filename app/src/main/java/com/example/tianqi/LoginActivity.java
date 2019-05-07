@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.tianqi.utils.SqliteDB;
+
 
 public class LoginActivity extends AppCompatActivity {
     private EditText etUserName;
@@ -55,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, SignActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

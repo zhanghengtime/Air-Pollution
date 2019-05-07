@@ -3,7 +3,8 @@ package com.example.tianqi;
 import android.os.Handler;
 import android.os.Message;
 
-//            LoopView
+// LoopView
+// 日期选择器组件
 
 final class MessageHandler extends Handler {
 

@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.tianqi.utils.DBAdapter;
+import com.example.tianqi.utils.User;
+
 public class AdminActivity extends AppCompatActivity {
     /** Called when the activity is first created. */
     private DBAdapter dbAdepter ;
@@ -48,6 +51,7 @@ public class AdminActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AdminActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

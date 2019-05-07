@@ -1,4 +1,4 @@
-package com.example.tianqi;
+package com.example.tianqi.utils;
 
 public class Air{
     public int id; //id

@@ -45,4 +45,5 @@ dependencies {
     implementation files('libs/mysql-connector-java-5.1.13.jar')
     implementation files('libs/BaiduLBS_Android.jar')
     implementation files('libs/IndoorscapeAlbumPlugin.jar')
+    implementation files('libs/com.baidu.tts_2.3.2.20180713_6101c2a.jar')
 }

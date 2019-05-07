@@ -1,6 +1,9 @@
 package com.example.tianqi;
 
-//用于注册活动
+/**用于注册活动
+ * 连接数据库实现注册功能
+ */
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.tianqi.utils.SqliteDB;
+import com.example.tianqi.utils.User;
 
 public class SignActivity extends AppCompatActivity {
     private EditText etUserName;
@@ -24,7 +30,7 @@ public class SignActivity extends AppCompatActivity {
         btnRegister=findViewById(R.id.btn_sign);
         mBtnLogin2 = findViewById(R.id.btn_login2);
         SqliteDB.getInstance(getApplicationContext()).saveRoot();
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {  //注册事件
             @Override
             public void onClick(View view) {
                 String name=etUserName.getText().toString().trim();
@@ -51,8 +57,9 @@ public class SignActivity extends AppCompatActivity {
         mBtnLogin2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignActivity.this, LoginActivity.class);
+                Intent intent = new Intent(SignActivity.this, LoginActivity.class);  //跳转登录
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -1,13 +1,10 @@
-// Decompiled by Jad v1.5.8e. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.geocities.com/kpdus/jad.html
-// Decompiler options: braces fieldsfirst space lnc 
-
 package com.example.tianqi;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-//            LoopView
+// LoopView
+// 日期选择器组件
 
 final class MyTimerTask extends TimerTask {
 

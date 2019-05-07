@@ -1,6 +1,13 @@
 package com.example.tianqi;
 
+/**
+ * 地图模式
+ * 实现定位和污染查询
+ * 接入百度地图API
+ */
+
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
@@ -11,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -28,31 +36,34 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.example.tianqi.utils.MyDBOpenHelper;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 public class MapActivity extends AppCompatActivity {
     private MapView mMapView;
     private boolean isFirstLocation = true;
     public LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
     private BaiduMap mBaiduMap;
-    private double lat;
-    private double lon;
+    private double lat;  //纬度
+    private double lon; //经度
     private TextView displayView;
     private static Handler handler=new Handler();
     private Button map_find;
+    private Button map_esc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_map);
         map_find = (Button)findViewById(R.id.btn_map_find);
+        map_esc = (Button)findViewById(R.id.btn_map_esc);
         displayView = (TextView)findViewById(R.id.map_results);
 //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.bmapView);
@@ -88,6 +99,15 @@ public class MapActivity extends AppCompatActivity {
 
         }
         mLocationClient.start();
+        map_esc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MapActivity.this,"退出！",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MapActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 //开始定位
         map_find.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,18 +116,19 @@ public class MapActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try{
-                            Class.forName("com.mysql.jdbc.Driver");
-                            String url="jdbc:mysql://192.168.56.1:3306/db_pollution?characterEncoding=UTF-8";
-                            Connection conn = DriverManager.getConnection(url,"root","");
+                          //  Class.forName("com.mysql.jdbc.Driver");
+                           // String url="jdbc:mysql://192.168.1.107:3306/db_pollution?characterEncoding=UTF-8";
+                           // Connection conn = DriverManager.getConnection(url,"root","");
+                            Connection conn = MyDBOpenHelper.getConn();
                             if(conn!=null){
                                 Log.d("调试","连接成功");
                                 Statement stmt = conn.createStatement();
-                                String sql = "SELECT * FROM pollution WHERE ABS("+lon+"-经度)<10 AND ABS("+lat+"-0.1)<10  ";
+                                String sql = "SELECT * FROM pollution WHERE ABS("+lon+"-经度)<5 AND ABS("+lat+"-纬度)<5  "; //经纬度控制在5以内
                                 ResultSet rs = stmt.executeQuery(sql);
                                 String result="";
                                 while(rs.next()) {
                                     result += "经度: " + rs.getString(5) + " \n";
-                                    result += "纬度:" + rs.getString(6) + " \n";
+                                    result += "纬度: " + rs.getString(6) + " \n";
                                     result += "首要污染物: " + rs.getString(15) + " \n";
                                     result += "温度: " + rs.getString(16) + " \n";
                                     result += "湿度: " + rs.getString(17) + " \n";
@@ -129,15 +150,15 @@ public class MapActivity extends AppCompatActivity {
                             }else{
                                 Log.d("调试","连接失败");
                             }
-                        }catch (ClassNotFoundException e){
-                            e.printStackTrace();
+                        //}catch (ClassNotFoundException e){
+                       //     e.printStackTrace();
                         }catch (SQLException e){
                             Log.i("debug",Log.getStackTraceString(e));
                             final String str =   e.toString();
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    displayView.setText(str);
+                                    displayView.setText("暂无相关信息");
                                 }});
                         }
                     }

@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.tianqi.utils.MyDBOpenHelper;
+
+import java.sql.Connection;
+
 public class DeleteActivity extends AppCompatActivity {
     private EditText etshankind;
     private Button mBtndelete_esc;
@@ -29,9 +33,10 @@ public class DeleteActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try{
-                            Class.forName("com.mysql.jdbc.Driver");
-                            String url="jdbc:mysql://192.168.56.1:3306/db_pollution?characterEncoding=UTF-8";          //连接数据库
-                            java.sql.Connection conn = java.sql.DriverManager.getConnection(url,"root","");   //mysql账号名 密码
+                           // Class.forName("com.mysql.jdbc.Driver");
+                           // String url="jdbc:mysql://192.168.1.107:3306/db_pollution?characterEncoding=UTF-8";          //连接数据库
+                           // java.sql.Connection conn = java.sql.DriverManager.getConnection(url,"root","");   //mysql账号名 密码
+                            Connection conn = MyDBOpenHelper.getConn();
                             if(conn!=null){
                                 android.util.Log.d("调试","连接成功");
                                 java.sql.Statement stmt = conn.createStatement();
@@ -57,8 +62,8 @@ public class DeleteActivity extends AppCompatActivity {
                             }else{
                                 android.util.Log.d("调试","连接失败");
                             }
-                        }catch (ClassNotFoundException e){
-                            e.printStackTrace();
+                       // }catch (ClassNotFoundException e){
+                        //    e.printStackTrace();
                         }catch (java.sql.SQLException e){
                             android.util.Log.i("debug",android.util.Log.getStackTraceString(e));
                             final String str =   e.toString();
@@ -66,6 +71,14 @@ public class DeleteActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     Toast.makeText(DeleteActivity.this,str,Toast.LENGTH_SHORT).show();
+                                }});
+                        }
+                        catch (Exception e)
+                        {
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(DeleteActivity.this,"删除失败!",Toast.LENGTH_SHORT).show();
                                 }});
                         }
                     }
@@ -79,6 +92,7 @@ public class DeleteActivity extends AppCompatActivity {
                 Toast.makeText(DeleteActivity.this,"退出！",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(DeleteActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

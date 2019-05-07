@@ -1,4 +1,4 @@
-package com.example.tianqi;
+package com.example.tianqi.utils;
 
 public class User {
     public int id;

@@ -1,4 +1,4 @@
-package com.example.tianqi;
+package com.example.tianqi.utils;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.example.tianqi.LoopView;
+import com.example.tianqi.R;
 
 import java.util.Arrays;
 import java.util.Calendar;

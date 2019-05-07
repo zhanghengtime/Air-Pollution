@@ -1,5 +1,6 @@
 package com.example.tianqi;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.tianqi.utils.DatePickerDialog;
+import com.example.tianqi.utils.DateUtil;
+import com.example.tianqi.utils.MyDBOpenHelper;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class CountActivity extends AppCompatActivity {
     /** Called when the activity is first created. */
@@ -22,7 +28,10 @@ public class CountActivity extends AppCompatActivity {
     private TextView labelView;
     private TextView displayView;
     private Button btn_count_esc001;
+    private EditText etTime;
     private static Handler handler=new Handler();
+    public String eTime=null;
+    private Dialog dateDialog;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +40,7 @@ public class CountActivity extends AppCompatActivity {
         et_count_qvxia = (EditText)findViewById(R.id.et_count_qvxian);
         labelView = (TextView)findViewById(R.id.label001);
         displayView = (TextView)findViewById(R.id.display001);
+        etTime=findViewById(R.id.et_count_timess);
         Button btn_count_AQI = (Button)findViewById(R.id.btn_count_AQI);
         Button btn_count_PM10 = (Button)findViewById(R.id.btn_count_PM10);
         Button btn_count_PM25 = (Button)findViewById(R.id.btn_count_PM25);
@@ -43,6 +53,13 @@ public class CountActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CountActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
+            }
+        });
+        etTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateDialog(DateUtil.getDateForString("2019-05-04"));
             }
         });
         btn_count_AQI.setOnClickListener(new View.OnClickListener() {
@@ -52,30 +69,40 @@ public class CountActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try{
-                            Class.forName("com.mysql.jdbc.Driver");
-                            String url="jdbc:mysql://192.168.56.1:3306/db_pollution?characterEncoding=UTF-8";
-                            Connection conn = DriverManager.getConnection(url,"root","");
+                            //Class.forName("com.mysql.jdbc.Driver");
+                            //String url="jdbc:mysql://192.168.1.107:3306/db_pollution?characterEncoding=UTF-8";
+                           // Connection conn = DriverManager.getConnection(url,"root","");
+                            Connection conn = MyDBOpenHelper.getConn();
                             if(conn!=null){
                                 Log.d("调试","连接成功");
                                 Statement stmt = conn.createStatement();
-                                String sql = "select MAX(AQI) from pollution " + "where 区县 =\"" + et_count_qvxia.getText().toString()+"\"";
+                                String sql = "select MAX(AQI) from pollution " + "where 区县 =\"" + et_count_qvxia.getText().toString()+"\" and 时间= \"" + etTime.getText().toString() +"\"";
                                 ResultSet rs = stmt.executeQuery(sql);
                                 String result="";
                                 while(rs.next()) {
-                                        result += "最大AQI: " + rs.getString(1) + " \n\n";
+                                        result += "最大AQI:  " + rs.getString(1) + " \n\n";
+                                        if( rs.getString(1)==null)
+                                        {
+                                            result=null;
+                                        }
                                 }
                                 final String strr = result;
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        displayView.setText(strr);
+                                        if(!(strr==null)) {
+                                            displayView.setText(strr);
+                                        }
+                                        else{
+                                            displayView.setText("无");
+                                        }
                                     }
                                 });
                             }else{
                                 Log.d("调试","连接失败");
                             }
-                        }catch (ClassNotFoundException e){
-                            e.printStackTrace();
+                      //  }catch (ClassNotFoundException e){
+                      //      e.printStackTrace();
                         }catch (SQLException e){
                             Log.i("debug",Log.getStackTraceString(e));
                             final String str =   e.toString();
@@ -106,13 +133,22 @@ public class CountActivity extends AppCompatActivity {
                                 ResultSet rs = stmt.executeQuery(sql);
                                 String result="";
                                 while(rs.next()) {
-                                    result += "最大PM10: " + rs.getString(1) + " \n\n";
+                                    result += "最大PM10:  " + rs.getString(1) + " \n\n";
+                                    if( rs.getString(1)==null)
+                                    {
+                                        result=null;
+                                    }
                                 }
                                 final String strr = result;
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        displayView.setText(strr);
+                                        if(!(strr==null)) {
+                                            displayView.setText(strr);
+                                        }
+                                        else{
+                                            displayView.setText("无");
+                                        }
                                     }
                                 });
                             }else{
@@ -150,13 +186,22 @@ public class CountActivity extends AppCompatActivity {
                                 ResultSet rs = stmt.executeQuery(sql);
                                 String result="";
                                 while(rs.next()) {
-                                    result += "最大PM25: " + rs.getString(1) + " \n\n";
+                                    result += "最大PM25:  " + rs.getString(1) + " \n\n";
+                                    if( rs.getString(1)==null)
+                                    {
+                                        result=null;
+                                    }
                                 }
                                 final String strr = result;
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        displayView.setText(strr);
+                                        if(!(strr==null)) {
+                                            displayView.setText(strr);
+                                        }
+                                        else{
+                                            displayView.setText("无");
+                                        }
                                     }
                                 });
                             }else{
@@ -194,13 +239,22 @@ public class CountActivity extends AppCompatActivity {
                                 ResultSet rs = stmt.executeQuery(sql);
                                 String result="";
                                 while(rs.next()) {
-                                    result += "最大SO2: " + rs.getString(1) + " \n\n";
+                                    result += "最大SO2:  " + rs.getString(1) + " \n\n";
+                                    if( rs.getString(1)==null)
+                                    {
+                                        result=null;
+                                    }
                                 }
                                 final String strr = result;
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        displayView.setText(strr);
+                                        if(!(strr==null)) {
+                                            displayView.setText(strr);
+                                        }
+                                        else{
+                                            displayView.setText("无");
+                                        }
                                     }
                                 });
                             }else{
@@ -238,13 +292,22 @@ public class CountActivity extends AppCompatActivity {
                                 ResultSet rs = stmt.executeQuery(sql);
                                 String result="";
                                 while(rs.next()) {
-                                    result += "最大温度: " + rs.getString(1) + " \n\n";
+                                    result += "最大温度:  " + rs.getString(1) + " \n\n";
+                                    if( rs.getString(1)==null)
+                                    {
+                                        result=null;
+                                    }
                                 }
                                 final String strr = result;
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        displayView.setText(strr);
+                                        if(!(strr==null)) {
+                                            displayView.setText(strr);
+                                        }
+                                        else{
+                                            displayView.setText("无");
+                                        }
                                     }
                                 });
                             }else{
@@ -282,13 +345,22 @@ public class CountActivity extends AppCompatActivity {
                                 ResultSet rs = stmt.executeQuery(sql);
                                 String result="";
                                 while(rs.next()) {
-                                    result += "最大O3: " + rs.getString(1) + " \n\n";
+                                    result += "最大O3:  " + rs.getString(1) + " \n\n";
+                                    if( rs.getString(1)==null)
+                                    {
+                                        result=null;
+                                    }
                                 }
                                 final String strr = result;
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        displayView.setText(strr);
+                                        if(!(strr==null)) {
+                                            displayView.setText(strr);
+                                        }
+                                        else{
+                                            displayView.setText("无");
+                                        }
                                     }
                                 });
                             }else{
@@ -326,13 +398,22 @@ public class CountActivity extends AppCompatActivity {
                                 ResultSet rs = stmt.executeQuery(sql);
                                 String result="";
                                 while(rs.next()) {
-                                    result += "最大CO: " + rs.getString(1) + " \n\n";
+                                    result += "最大CO:  " + rs.getString(1) + " \n\n";
+                                    if( rs.getString(1)==null)
+                                    {
+                                        result=null;
+                                    }
                                 }
                                 final String strr = result;
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        displayView.setText(strr);
+                                        if(!(strr==null)) {
+                                            displayView.setText(strr);
+                                        }
+                                        else{
+                                            displayView.setText("无");
+                                        }
                                     }
                                 });
                             }else{
@@ -353,5 +434,28 @@ public class CountActivity extends AppCompatActivity {
                 }).start();
             }
         });
+    }
+    private void showDateDialog(List<Integer> date) {
+        DatePickerDialog.Builder builder = new DatePickerDialog.Builder(this);
+        builder.setOnDateSelectedListener(new DatePickerDialog.OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(int[] dates) {
+                //  2019-05-04
+                eTime=String.format("%d-%s-%s", dates[0], dates[1] > 9 ? dates[1] : ("0" + dates[1]), dates[2] > 9 ? dates[2] : ("0" + dates[2]));
+                etTime.setText(eTime);
+            }
+            @Override
+            public void onCancel() {
+
+            }
+        })
+                .setSelectYear(date.get(0) - 1)
+                .setSelectMonth(date.get(1) - 1)
+                .setSelectDay(date.get(2) - 1);
+        builder.setMaxYear(DateUtil.getYear());
+        builder.setMaxMonth(DateUtil.getDateForString(DateUtil.getToday()).get(1));
+        builder.setMaxDay(DateUtil.getDateForString(DateUtil.getToday()).get(2));
+        dateDialog = builder.create();
+        dateDialog.show();
     }
 }

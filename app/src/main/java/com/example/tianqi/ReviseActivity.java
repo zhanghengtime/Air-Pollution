@@ -1,6 +1,9 @@
 package com.example.tianqi;
 
-//用来修改界面
+/**用来修改界面
+ * 实现修改操作
+ */
+
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.tianqi.utils.MyDBOpenHelper;
+
+import java.sql.Connection;
 
 public class ReviseActivity extends AppCompatActivity {
     private EditText et_count_0;
@@ -33,9 +40,10 @@ public class ReviseActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try{
-                            Class.forName("com.mysql.jdbc.Driver");
-                            String url="jdbc:mysql://192.168.56.1:3306/db_pollution?characterEncoding=UTF-8";
-                            java.sql.Connection conn = java.sql.DriverManager.getConnection(url,"root","");
+                           // Class.forName("com.mysql.jdbc.Driver");
+                           // String url="jdbc:mysql://192.168.1.107:3306/db_pollution?characterEncoding=UTF-8";
+                           // java.sql.Connection conn = java.sql.DriverManager.getConnection(url,"root","");
+                            Connection conn = MyDBOpenHelper.getConn();
                             if(conn!=null){
                                 android.util.Log.d("调试","连接成功");
                                 java.sql.Statement stmt = conn.createStatement();
@@ -62,8 +70,8 @@ public class ReviseActivity extends AppCompatActivity {
                             }else{
                                 android.util.Log.d("调试","连接失败");
                             }
-                        }catch (ClassNotFoundException e){
-                            e.printStackTrace();
+                        //}catch (ClassNotFoundException e){
+                       //     e.printStackTrace();
                         }catch (java.sql.SQLException e){
                             android.util.Log.i("debug",android.util.Log.getStackTraceString(e));
                             final String str =   e.toString();
@@ -71,6 +79,13 @@ public class ReviseActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     Toast.makeText(ReviseActivity.this,str,Toast.LENGTH_SHORT).show();
+                                }});
+                        } catch (Exception e)
+                        {
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ReviseActivity.this,"修改失败!",Toast.LENGTH_SHORT).show();
                                 }});
                         }
                     }

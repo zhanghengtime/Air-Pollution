@@ -1,11 +1,9 @@
-
-
 package com.example.tianqi;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-//            LoopView
+//LoopView
 
 final class LoopTimerTask extends TimerTask {
 

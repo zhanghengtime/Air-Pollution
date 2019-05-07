@@ -1,7 +1,8 @@
-
 package com.example.tianqi;
 
-//            LoopView, LoopListener
+//LoopView, LoopListener
+
+import com.example.tianqi.utils.LoopListener;
 
 final class LoopRunnable implements Runnable {
 

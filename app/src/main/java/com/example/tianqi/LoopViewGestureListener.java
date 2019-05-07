@@ -1,5 +1,3 @@
-
-
 package com.example.tianqi;
 
 import android.view.MotionEvent;

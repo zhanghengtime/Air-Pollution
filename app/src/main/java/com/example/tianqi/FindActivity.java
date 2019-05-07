@@ -12,6 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.tianqi.utils.DatePickerDialog;
+import com.example.tianqi.utils.DateUtil;
+
 import java.lang.*;
 import java.util.List;
 
@@ -81,6 +85,7 @@ public class FindActivity extends AppCompatActivity {
                 Toast.makeText(FindActivity.this,"退出！",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(FindActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -1,5 +1,9 @@
 package com.example.tianqi;
 
+/**
+ * 查询结果显示页面
+ */
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,13 +11,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.os.Bundle;
 import android.os.Handler;
-import android.widget.Toast;
 
+
+import com.example.tianqi.utils.MyDBOpenHelper;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -41,15 +44,17 @@ public class FindResultActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(FindResultActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         new  Thread(new Runnable() {
             @Override
             public void run() {
                 try{
-                    Class.forName("com.mysql.jdbc.Driver");
-                    String url="jdbc:mysql://192.168.56.1:3306/db_pollution?characterEncoding=UTF-8";
-                    Connection conn = DriverManager.getConnection(url,"root","");
+                 //   Class.forName("com.mysql.jdbc.Driver");
+                   // String url="jdbc:mysql://192.168.1.107:3306/db_pollution?characterEncoding=UTF-8";
+                   // Connection conn = DriverManager.getConnection(url,"root","");
+                    Connection conn = MyDBOpenHelper.getConn();
                     if(conn!=null){
                         Log.d("调试","连接成功");
                         Statement stmt = conn.createStatement();
@@ -74,7 +79,7 @@ public class FindResultActivity extends AppCompatActivity {
                             result += "时间: " + rs.getString(7) + " \n";
                             result += "首要污染物: " + rs.getString(15) + " \n";
                             result += "温度: " + rs.getString(16) + " \n";
-                            result += "湿度: " + rs.getString(17) + " \n";
+                            result += "湿度: " + rs.getString(17) + " \n\n";
                             if(kind.equals("AQI")) {
                                 result += "AQI: " + rs.getString(8) + " \n\n";
                             }
@@ -103,21 +108,31 @@ public class FindResultActivity extends AppCompatActivity {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                displayView.setText(strr);
+                                if(!(strr.equals(""))) {
+                                    displayView.setText(strr);
+                                }
+                                else{
+                                    displayView.setText("无");
+                                }
                                 }
                             });
                     }else{
                         Log.d("调试","连接失败");
                     }
-                }catch (ClassNotFoundException e){
-                    e.printStackTrace();
+               // }catch (ClassNotFoundException e){
+                    //e.printStackTrace();
+                   // handler.post(new Runnable() {
+                      //  @Override
+                     //   public void run() {
+                    //        displayView.setText("查询失败!");
+                    //    }});
                 }catch (SQLException e){
                     Log.i("debug",Log.getStackTraceString(e));
                     final String str =   e.toString();
                    handler.post(new Runnable() {
                            @Override
                           public void run() {
-                               displayView.setText(str);
+                               displayView.setText("查询失败!");
                                }});
                 }
                 }
