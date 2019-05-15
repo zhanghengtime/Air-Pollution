@@ -38,6 +38,10 @@
     <uses-permission android:name="android.permission.CAMERA" />
     //程序在手机屏幕关闭后后台进程仍然运行
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    //外部存储
+
 
     <application
         android:name="DemoApplication"
@@ -70,6 +74,7 @@
         <activity android:name=".CountActivity"/>
         <activity android:name=".MapActivity"/>
         <activity android:name=".WarnActivity"/>
+        <activity android:name=".ReadActivity"/>
         <service android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote"/>

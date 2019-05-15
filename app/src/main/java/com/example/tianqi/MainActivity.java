@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this,"读入数据模块！",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                Intent intent = new Intent(MainActivity.this, ReadActivity.class);
                 startActivity(intent);
                 finish();
             }

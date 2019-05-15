@@ -17,6 +17,7 @@ import android.os.Handler;
 import com.example.tianqi.utils.MyDBOpenHelper;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -51,10 +52,10 @@ public class FindResultActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                 //   Class.forName("com.mysql.jdbc.Driver");
-                   // String url="jdbc:mysql://192.168.1.107:3306/db_pollution?characterEncoding=UTF-8";
-                   // Connection conn = DriverManager.getConnection(url,"root","");
-                    Connection conn = MyDBOpenHelper.getConn();
+                    Class.forName("com.mysql.jdbc.Driver");
+                   String url="jdbc:mysql://192.168.1.109:3306/db_pollution?characterEncoding=UTF-8";
+                    Connection conn = DriverManager.getConnection(url,"root","");
+                    //Connection conn = MyDBOpenHelper.getConn();
                     if(conn!=null){
                         Log.d("调试","连接成功");
                         Statement stmt = conn.createStatement();
@@ -119,20 +120,20 @@ public class FindResultActivity extends AppCompatActivity {
                     }else{
                         Log.d("调试","连接失败");
                     }
-               // }catch (ClassNotFoundException e){
-                    //e.printStackTrace();
-                   // handler.post(new Runnable() {
-                      //  @Override
-                     //   public void run() {
-                    //        displayView.setText("查询失败!");
-                    //    }});
+                }catch (ClassNotFoundException e){
+                    e.printStackTrace();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            displayView.setText("查询失败!");
+                        }});
                 }catch (SQLException e){
                     Log.i("debug",Log.getStackTraceString(e));
                     final String str =   e.toString();
                    handler.post(new Runnable() {
                            @Override
                           public void run() {
-                               displayView.setText("查询失败!");
+                               displayView.setText(str);
                                }});
                 }
                 }
