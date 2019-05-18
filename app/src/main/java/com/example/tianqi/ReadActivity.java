@@ -220,7 +220,7 @@ public class ReadActivity extends AppCompatActivity {
             File csv = new File(file);//csv文件
             BufferedReader br = new BufferedReader(new FileReader(csv));
             String line = "";
-            String lines = "站点名称,设备类型,源类型,区县,经度,纬度\n时间,AQI,PM10,PM25,SO2,NO2,O3,CO\n首要污染物,温度,湿度\n\n                      读入以下数据(仅列三条)\n\n";
+            String lines = "站点名称 设备类型 源类型 区县 经度 纬度\n时间 AQI PM10 PM25 SO2 NO2 O3 CO\n首要污染物 温度  湿度\n\n                      读入以下数据(仅列三条)\n\n";
             while((line = br.readLine())!=null) {
                 final String buffer[] = line.split(",");// 以逗号分隔
                 int i = 0;

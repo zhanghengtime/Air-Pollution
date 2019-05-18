@@ -53,7 +53,7 @@ public class FindResultActivity extends AppCompatActivity {
             public void run() {
                 try{
                     Class.forName("com.mysql.jdbc.Driver");
-                   String url="jdbc:mysql://192.168.1.109:3306/db_pollution?characterEncoding=UTF-8";
+                   String url="jdbc:mysql://192.168.1.108:3306/db_pollution?characterEncoding=UTF-8";
                     Connection conn = DriverManager.getConnection(url,"root","");
                     //Connection conn = MyDBOpenHelper.getConn();
                     if(conn!=null){

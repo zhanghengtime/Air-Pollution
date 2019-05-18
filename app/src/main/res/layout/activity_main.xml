@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
@@ -7,6 +7,7 @@
     android:background="@drawable/mainback">
 
     <Button
+        android:stateListAnimator="@null"
         android:id="@+id/btn_main_read"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -17,67 +18,97 @@
         android:textSize="20sp" />
 
     <Button
+        android:stateListAnimator="@null"
         android:id="@+id/btn_main_find"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_below="@id/btn_main_read"
         android:background="@drawable/anliu_1"
         android:hint="数据查询"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="50dp"/>
 
     <Button
+        android:stateListAnimator="@null"
         android:id="@+id/btn_main_manage"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/anliu_1"
+        android:layout_below="@id/btn_main_find"
         android:hint="数据管理"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="50dp"/>
 
     <Button
+        android:stateListAnimator="@null"
         android:id="@+id/btn_main_count"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:background="@drawable/anliu_1"
+        android:layout_below="@id/btn_main_manage"
         android:hint="污染物统计"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="50dp"/>
 
     <Button
+        android:stateListAnimator="@null"
         android:id="@+id/btn_main_warn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
         android:background="@drawable/anliu_1"
+        android:layout_below="@id/btn_main_manage"
         android:hint="污染物预警"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="50dp"/>
 
     <Button
+        android:stateListAnimator="@null"
         android:id="@+id/btn_main_map"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:background="@drawable/anliu_1"
+        android:layout_below="@id/btn_main_warn"
         android:hint="地图模式"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="50dp"/>
 
-    <Button
-        android:id="@+id/btn_main_esc"
+
+    <!--设置抽屉控件-->
+    <SlidingDrawer
+        android:visibility="visible"
+        android:id="@+id/drawer1"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/anliu_1"
-        android:hint="退出"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:layout_marginTop="25dp"/>
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:content="@+id/myView"
+        android:handle="@id/mainlyaout1"
+        android:orientation="horizontal">
+        <!--设置引导按钮-->
+        <LinearLayout
+            android:id="@+id/mainlyaout1"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/open"/>
+        </LinearLayout>
+        <!--设置抽屉显示内容-->
+        <ImageView
+            android:id="@+id/myView"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:src="@drawable/gongao"/>
 
-</LinearLayout>
+    </SlidingDrawer>
+</RelativeLayout>

@@ -8,7 +8,7 @@
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
         android:layout_width="match_parent"
-        android:layout_height="390dp"
+        android:layout_height="360dp"
         android:clickable="true" />
     <LinearLayout android:id="@+id/LinearLayout002"
         android:layout_width="fill_parent"
@@ -31,6 +31,17 @@
         android:textColor="#fff"
         android:textSize="20sp" />
     </LinearLayout>
+    <Spinner
+        android:id="@+id/map_places"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/user_name"
+        android:drawablePadding="5dp"
+        android:maxLines="1"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#FFAD33"
+        android:textSize="18sp" />
     <ScrollView android:layout_width="fill_parent"
         android:layout_height="fill_parent">
         <LinearLayout android:layout_width="fill_parent"

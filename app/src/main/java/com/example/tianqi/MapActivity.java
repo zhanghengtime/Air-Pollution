@@ -16,7 +16,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +47,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MapActivity extends AppCompatActivity {
     private MapView mMapView;
@@ -57,6 +61,8 @@ public class MapActivity extends AppCompatActivity {
     private static Handler handler=new Handler();
     private Button map_find;
     private Button map_esc;
+    private Spinner mSpinner;
+    public String strrr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +71,7 @@ public class MapActivity extends AppCompatActivity {
         map_find = (Button)findViewById(R.id.btn_map_find);
         map_esc = (Button)findViewById(R.id.btn_map_esc);
         displayView = (TextView)findViewById(R.id.map_results);
+        mSpinner = (Spinner) findViewById(R.id.map_places);
 //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.bmapView);
 //获取BaiduMap对象
@@ -98,6 +105,26 @@ public class MapActivity extends AppCompatActivity {
             // requestLocation();
 
         }
+        String[] mItems = getResources().getStringArray(R.array.placename);
+        // 建立Adapter并且绑定数据源
+        ArrayAdapter<String> _Adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, mItems);
+        //绑定 Adapter到控件
+        mSpinner.setAdapter(_Adapter);
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+               String str=parent.getItemAtPosition(position).toString();
+               strrr = str;
+               isFirstLocation=true;
+                //intent.putExtra("et3", str);
+                //Toast.makeText(MapActivity.this,str,Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+            }
+        });
         mLocationClient.start();
         map_esc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +150,7 @@ public class MapActivity extends AppCompatActivity {
                             if(conn!=null){
                                 Log.d("调试","连接成功");
                                 Statement stmt = conn.createStatement();
-                                String sql = "SELECT * FROM pollution WHERE ABS("+lon+"-经度)<5 AND ABS("+lat+"-纬度)<5  "; //经纬度控制在5以内
+                                String sql = "SELECT * FROM pollution WHERE ABS("+lon+"-经度)<0.05 AND ABS("+lat+"-纬度)<0.05  "; //经纬度控制在5以内
                                 ResultSet rs = stmt.executeQuery(sql);
                                 String result="";
                                 while(rs.next()) {
@@ -144,7 +171,12 @@ public class MapActivity extends AppCompatActivity {
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        displayView.setText(strr);
+                                        if(strr.equals(""))
+                                        {
+                                            displayView.setText("暂无相关信息");
+                                        }else {
+                                            displayView.setText(strr);
+                                        }
                                     }
                                 });
                             }else{
@@ -233,9 +265,9 @@ public class MapActivity extends AppCompatActivity {
             sb.append("\nerror code : ");
             sb.append(location.getLocType());
             sb.append("\nlatitude : ");
-            sb.append(location.getLatitude());
+            sb.append(lat);
             sb.append("\nlontitude : ");
-            sb.append(location.getLongitude());
+            sb.append(lon);
             sb.append("\nradius : ");
             sb.append(location.getRadius());
             if (location.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
@@ -283,14 +315,59 @@ public class MapActivity extends AppCompatActivity {
                     sb.append(p.getId() + " " + p.getName() + " " + p.getRank());
                 }
             }
-            lat = location.getLatitude();
-            lon = location.getLongitude();
+            if(strrr.equals("选择:当前位置")) {
+                lat = location.getLatitude();
+                lon = location.getLongitude();
+            }else if(strrr.equals("北辰区"))
+            {
+                lon = 117.065;
+                lat = 39.245;
+            }else if(strrr.equals("红桥区"))
+            {
+                lon = 117.165;
+                lat = 39.184;
+            }else if(strrr.equals("河西区"))
+            {
+                lon = 117.229;
+                lat = 39.115;
+            }else if(strrr.equals("和平区"))
+            {
+                lon = 117.221;
+                lat = 39.123;
+            }else if(strrr.equals("河北区"))
+            {
+                lon = 117.203;
+                lat = 39.153;
+            }else if(strrr.equals("滨海新区"))
+            {
+                lon = 117.702;
+                lat = 39.022;
+            }else if(strrr.equals("东丽区"))
+            {
+                lat = 117.320;
+                lon = 39.092;
+            }else if(strrr.equals("西青区"))
+            {
+                lon = 117.015;
+                lat = 39.148;
+            }else if(strrr.equals("武清区"))
+            {
+                lon = 117.051;
+                lat = 39.389;
+            }else if(strrr.equals("河东区"))
+            {
+                lon = 117.258;
+                lat = 39.135;
+            }else {
+                lat = location.getLatitude();
+                lon = location.getLongitude();
+            }
 //这个判断是为了防止每次定位都重新设置中心点和marker
             if(isFirstLocation){
-                isFirstLocation = false;
+               isFirstLocation = false;
                 setMarker();
                 setUserMapCenter();
-            }
+           }
             Log.v("pcw","lat : " + lat+" lon : " + lon);
         }
     }

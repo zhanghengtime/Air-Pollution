@@ -12,4 +12,17 @@
         <item>湿度</item>
         <item>首要污染物</item>
     </string-array>
+    <string-array name="placename">
+        <item>选择:当前位置</item>
+        <item>北辰区</item>
+        <item>红桥区</item>
+        <item>河西区</item>
+        <item>和平区</item>
+        <item>河北区</item>
+        <item>滨海新区</item>
+        <item>东丽区</item>
+        <item>西青区</item>
+        <item>武清区</item>
+        <item>河东区</item>
+    </string-array>
 </resources>
