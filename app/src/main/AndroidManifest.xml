@@ -16,8 +16,9 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     //这个权限用于进行网络定位
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions"/>
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
     //获取设备网络状态，禁用后无法获取网络状态
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     //网络权限，当禁用后，无法进行检索等相关业务
@@ -38,23 +39,22 @@
     <uses-permission android:name="android.permission.CAMERA" />
     //程序在手机屏幕关闭后后台进程仍然运行
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     //外部存储
-
-
     <application
-        android:name="DemoApplication"
+        android:name=".DemoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/yun"
-        android:roundIcon="@mipmap/yun"
         android:label="大气监测系统"
-        android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/yun"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="eCV5BNsI3Ql6iXGBBHp9sPmej8G40lPk" />
+
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,20 +65,24 @@
         <activity android:name=".SignActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".FindActivity"/>
-        <activity android:name=".FindResultActivity"/>
-        <activity android:name=".ManageActivity"/>
+        <activity android:name=".FindActivity" />
+        <activity android:name=".FindResultActivity" />
+        <activity android:name=".ManageActivity" />
         <activity android:name=".AddActivity" />
         <activity android:name=".ReviseActivity" />
         <activity android:name=".DeleteActivity" />
-        <activity android:name=".CountActivity"/>
-        <activity android:name=".MapActivity"/>
-        <activity android:name=".WarnActivity"/>
-        <activity android:name=".ReadActivity"/>
-        <service android:name="com.baidu.location.f"
+        <activity android:name=".CountActivity" />
+        <activity android:name=".MapActivity" />
+        <activity android:name=".WarnActivity" />
+        <activity android:name=".ReadActivity" />
+        <service
+            android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"/>
-    </application>
+            android:process=":remote" />
 
+        <activity
+            android:name=".Fragment.PicCoutActivity"
+            android:label="图形化展示"></activity>
+    </application>
 
 </manifest>

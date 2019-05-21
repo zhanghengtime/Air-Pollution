@@ -9,7 +9,7 @@ public class MyDBOpenHelper {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");//获取MYSQL驱动
-            String url="jdbc:mysql://192.168.1.108:3306/db_pollution?characterEncoding=UTF-8";
+            String url="jdbc:mysql://192.168.1.110:3306/db_pollution?characterEncoding=UTF-8";
             conn = (Connection) DriverManager.getConnection(url,"root","");//获取连接
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

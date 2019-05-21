@@ -26,5 +26,9 @@
     <string name="timepicker_sure">确定</string>
     <string name="timepicker_cancel">取消</string>
     <string name="timepicker_title_default">设置</string>
+    <string name="title_activity_pic_cout">PicCoutActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

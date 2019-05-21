@@ -8,34 +8,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </RelativeLayout>
-        <Button
-            android:padding="3dip"
-            android:id="@+id/btn_find_esc1"
-            android:layout_width="fill_parent"
-            android:layout_height="48dp"
-            android:layout_below="@id/btn_login"
-            android:hint="退出"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textColorHint="#000"
-            android:shadowColor="@color/colorPrimary"
-            android:textSize="15sp" />
-    <TextView android:id="@+id/labelss"
-        android:text=" 查询结果："
-        android:textSize="20sp"
+
+    <TextView
+        android:id="@+id/labelss"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <ScrollView android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-        <LinearLayout android:layout_width="fill_parent"
-            android:layout_height="wrap_content" android:orientation="vertical">
-            <TextView android:id="@+id/find_results"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="查询结果"
+        android:textSize="30sp" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="450dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/find_results"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="20sp"
-                android:layout_width="wrap_content"
-                android:textStyle="bold"
-                android:layout_height="wrap_content" />
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
+    <Button android:id="@+id/change_chart"
+        android:text="图形化表示"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="20sp"
+        android:background="@drawable/anliu_1"
+        android:layout_alignParentBottom="true"/>
 
 </LinearLayout>

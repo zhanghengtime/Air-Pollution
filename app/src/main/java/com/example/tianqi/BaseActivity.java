@@ -49,6 +49,7 @@ public class BaseActivity extends AppCompatActivity implements MainHandlerConsta
     protected Dialog dateDialog;
     protected static Handler handler=new Handler();
     protected String eTime;
+    private int flag = 0;
 
 
     private static final String TAG = "BaseActivity";
@@ -115,7 +116,7 @@ public class BaseActivity extends AppCompatActivity implements MainHandlerConsta
                             if(conn!=null){
                                 Log.d("调试","连接成功");
                                 Statement stmt = conn.createStatement();
-                                String sql = "select * from pollution " + "where 时间= \"" + mTime.getText().toString() +"\"";
+                                String sql = "select * from pollution " + "where 时间= \"" + mTime.getText().toString() +"\" and AQI > 100 ORDER BY AQI DESC";
                                 //String sql = "SELECT * FROM pollution WHERE 时间=\"2018/3/1 23:00:00\"";
                       /* final String strrr = sql;
                         handler.post(new Runnable() {
@@ -126,22 +127,34 @@ public class BaseActivity extends AppCompatActivity implements MainHandlerConsta
                         });*/
                                 ResultSet rs = stmt.executeQuery(sql);
                                 String result="";
-                                while(rs.next()) {
+                                while(rs.next()&&flag<3) {
                                     //result += "站点名称：" + rs.getString(1)+ " \n";
                                     // result += "设备类型：" + rs.getString(2) + " \n";
                                     // result += "源类型：" + rs.getString(3) + " \n";
-                                    // result += "区县: " + rs.getString(4) + " \n";
+                                    result += "区县: " + rs.getString(4) + " \n";
                                //result += "经度: " + rs.getString(5) + " \n";
                                // result += "纬度:" + rs.getString(6) + " \n";
                                 result += "时间: " + rs.getString(7) + " ,\n";
                                 result += "首要污染物: " + rs.getString(15) + " ,\n";
-                                result += "各污染物指标:\nAQI: " + rs.getString(8) + " ,\n";
-                                result += "PM10: " + rs.getString(9) + " ,\n";
-                                result += "PM2.5: " + rs.getString(10) + " ,\n";
-                                result += "二氧化硫: " + rs.getString(11) + " ,\n";
-                                result += "二氧化碳: " + rs.getString(12) + " ,\n";
-                                result += "臭氧: " + rs.getString(13) + " ,\n";
-                                result += "一氧化碳: " + rs.getString(14) + " \n";
+                                result += "空气质量指数(AQI): " + rs.getString(8) + "\n";
+                                if(Float.parseFloat(rs.getString(8))>300)
+                                {
+                                    result+="提示:此空气状况健康人群运动耐受力降低，老年人和病人应停留在室内，避免体力消耗，一般人群避免户外活动。\n\n";
+                                }else if(Float.parseFloat(rs.getString(8))>200)
+                                {
+                                    result+="提示:此空气状况心脏病和肺病患者症状显著加剧，运动耐受力降低，儿童、老年人及心脏病、肺病患者应停留在室内，停止户外运动，一般人群减少户外运动。\n\n";
+                                }else if(Float.parseFloat(rs.getString(8))>150)
+                                {
+                                    result+="提示:此空气状况可能对健康人群心脏、呼吸系统有影响，儿童、老年人及心脏病、呼吸系统疾病患者避免长时间、高强度的户外锻炼，一般人群适量减少户外运动。\n\n";
+                                }else{
+                                    result+="提示:此空气状况健康人群出现刺激症状，儿童、老年人及心脏病、呼吸系统疾病患者应减少长时间、高强度的户外锻炼。\n\n";
+                                }
+                               // result += "PM10: " + rs.getString(9) + " ,\n";
+                               // result += "PM2.5: " + rs.getString(10) + " ,\n";
+                              //  result += "二氧化硫: " + rs.getString(11) + " ,\n";
+                              //  result += "二氧化碳: " + rs.getString(12) + " ,\n";
+                              //  result += "臭氧: " + rs.getString(13) + " ,\n";
+                              //  result += "一氧化碳: " + rs.getString(14) + " \n\n";
                                // result += "温度: " + rs.getString(16) + " \n";
                                /* result += "湿度: " + rs.getString(17) + " \n";*/
                                /* if(kind.equals("AQI")) {
@@ -167,6 +180,7 @@ public class BaseActivity extends AppCompatActivity implements MainHandlerConsta
                                     result += "CO: " + rs.getString(14) + " \n\n";
                                 }
                                 flag++;*/
+                               flag++;
                                 }
                                 final String strr = result;
                                 handler.post(new Runnable() {

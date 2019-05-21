@@ -63,6 +63,7 @@ public class MapActivity extends AppCompatActivity {
     private Button map_esc;
     private Spinner mSpinner;
     public String strrr;
+    private int flag = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +102,15 @@ public class MapActivity extends AppCompatActivity {
             String[] permissions=permissionList.toArray(new String[permissionList.size()]);
             ActivityCompat.requestPermissions(MapActivity.this,permissions,1);
         }else {
-            initLocation();
+            try {
+                initLocation();
+            }catch (Exception e)
+            {
+                Toast.makeText(MapActivity.this,"系统出现了一些问题！",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MapActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
             // requestLocation();
 
         }
@@ -150,10 +159,11 @@ public class MapActivity extends AppCompatActivity {
                             if(conn!=null){
                                 Log.d("调试","连接成功");
                                 Statement stmt = conn.createStatement();
-                                String sql = "SELECT * FROM pollution WHERE ABS("+lon+"-经度)<0.05 AND ABS("+lat+"-纬度)<0.05  "; //经纬度控制在5以内
+                                String sql = "SELECT * FROM pollution WHERE ABS("+lon+"-经度)<0.05 AND ABS("+lat+"-纬度)<0.05 ORDER BY id DESC"; //经纬度控制在0.05以内
                                 ResultSet rs = stmt.executeQuery(sql);
                                 String result="";
-                                while(rs.next()) {
+                                while(rs.next()&&flag<=2) {
+                                    result += "时间: " + rs.getString(7) + " \n";
                                     result += "经度: " + rs.getString(5) + " \n";
                                     result += "纬度: " + rs.getString(6) + " \n";
                                     result += "首要污染物: " + rs.getString(15) + " \n";
@@ -166,6 +176,7 @@ public class MapActivity extends AppCompatActivity {
                                     result += "NO2: " + rs.getString(12) + " \n";
                                     result += "O3: " + rs.getString(13) + " \n";
                                     result += "CO: " + rs.getString(14) + " \n\n";
+                                    flag++;
                                 }
                                 final String strr = result;
                                 handler.post(new Runnable() {
@@ -344,8 +355,8 @@ public class MapActivity extends AppCompatActivity {
                 lat = 39.022;
             }else if(strrr.equals("东丽区"))
             {
-                lat = 117.320;
-                lon = 39.092;
+                lon = 117.320;
+                lat = 39.092;//纬度
             }else if(strrr.equals("西青区"))
             {
                 lon = 117.015;

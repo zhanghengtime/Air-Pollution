@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="spinnername">
-        <item>AQI</item>
+        <item>选择指标:AQI</item>
         <item>PM10</item>
         <item>PM25</item>
         <item>SO2</item>

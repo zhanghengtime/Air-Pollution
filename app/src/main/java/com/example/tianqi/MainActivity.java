@@ -2,6 +2,7 @@ package com.example.tianqi;
 
 //主界面
 import android.content.Intent;
+import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,9 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.tianqi.Fragment.ContainerActivity;
+import com.example.tianqi.Fragment.PicCoutActivity;
 
 public class MainActivity extends AppCompatActivity {
     private Button button_determine, button_cancel;      //定义对话框按钮
@@ -46,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"读入数据模块！",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, ReadActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
         mBtnmanage.setOnClickListener(new View.OnClickListener() {

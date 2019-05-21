@@ -37,7 +37,6 @@ import java.sql.Connection;
 public class ReadActivity extends AppCompatActivity {
     private TextView tv;
     private Button btn_read;
-    private Button btn_read_esc;
     private static Handler handler=new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,6 @@ public class ReadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_read);
         btn_read = (Button) findViewById(R.id.btn_read);
         tv = (TextView) findViewById(R.id.tv22);
-        btn_read_esc = (Button)findViewById(R.id.btn_read_esc);
         btn_read.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,15 +51,6 @@ public class ReadActivity extends AppCompatActivity {
                 intent.setType("*/*");//无类型限制
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(intent, 1);
-            }
-        });
-        btn_read_esc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ReadActivity.this,"退出！",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ReadActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
             }
         });
     }
