@@ -37,6 +37,7 @@ public class FindResultActivity extends AppCompatActivity {
     public String CO="16";
     public String NO2="16";
     public String PM10="16";
+    public String AQI="0";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,7 @@ public class FindResultActivity extends AppCompatActivity {
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(displayView.getText().toString().equals("暂无相关信息!")) {
+                if(displayView.getText().toString().equals("暂无相关信息!")||displayView.getText().toString().equals("")) {
                     Toast.makeText(FindResultActivity.this,"无信息!",Toast.LENGTH_SHORT).show();
                 }else{
                     final Intent intent = new Intent(FindResultActivity.this, PicCoutActivity.class);
@@ -62,6 +63,7 @@ public class FindResultActivity extends AppCompatActivity {
                 intent.putExtra("t4", PM25);
                 intent.putExtra("t5", CO);
                 intent.putExtra("t6", O3);
+                intent.putExtra("t7", AQI);
                 startActivity(intent);
                 }
             }
@@ -105,6 +107,7 @@ public class FindResultActivity extends AppCompatActivity {
                             CO = rs.getString(14);
                             PM25 = rs.getString(10);
                             PM10 = rs.getString(9);
+                            AQI = rs.getString(8);
                             if(kind.equals("选择指标:AQI")) {
                                 result += "AQI: " + rs.getString(8) + " \n\n";
                             }

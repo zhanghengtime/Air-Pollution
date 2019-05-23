@@ -1,4 +1,7 @@
 package com.example.tianqi.Fragment;
+/**
+ * 柱状图
+ */
 
 import android.app.Fragment;
 import android.graphics.Color;
@@ -15,7 +18,9 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
 
@@ -46,37 +51,28 @@ public class readFragmentC extends Fragment {
 
     //添加数据
     public void initEntriesData() {
-        entries.add(new BarEntry(400f, 0));
-        entries.add(new BarEntry(800f, 1));
-        entries.add(new BarEntry(600f, 2));
-        entries.add(new BarEntry(1200f, 3));
-        entries.add(new BarEntry(1800f, 4));
-        entries.add(new BarEntry(900f, 5));
-        entries.add(new BarEntry(500f, 6));
-        entries.add(new BarEntry(600f, 7));
-        entries.add(new BarEntry(700f, 8));
-        entries.add(new BarEntry(1200f, 9));
-        entries.add(new BarEntry(1900f, 10));
-        entries.add(new BarEntry(2000f, 11));
+        float AQI = Float.parseFloat(getActivity().getIntent().getStringExtra("t7"));
+        entries.add(new BarEntry(50f, 0));
+        entries.add(new BarEntry(100f, 1));
+        entries.add(new BarEntry(150f, 2));
+        entries.add(new BarEntry(200f, 3));
+        entries.add(new BarEntry(300f, 4));
+        entries.add(new BarEntry(400f, 5));
+        entries.add(new BarEntry(AQI, 6));
     }
     //添加x轴值
     public void initLableData() {
-        labels.add("一月");
-        labels.add("二月");
-        labels.add("三月");
-        labels.add("四月");
-        labels.add("五月");
-        labels.add("六月");
-        labels.add("七月");
-        labels.add("八月");
-        labels.add("九月");
-        labels.add("十月");
-        labels.add("十一月");
-        labels.add("十二月");
+        labels.add("优级");
+        labels.add("良好");
+        labels.add("轻度污染");
+        labels.add("中度污染");
+        labels.add("重度污染");
+        labels.add("严重污染");
+        labels.add("当前状况");
     }
     public void show() {
         //装载显示数据
-        dataset = new BarDataSet(entries, "书籍销量(本)");
+        dataset = new BarDataSet(entries, "AQI指数");
         dataset.setColors(ColorTemplate.COLORFUL_COLORS);
         //封装x轴数据
         BarData data = new BarData(labels, dataset);
@@ -84,15 +80,19 @@ public class readFragmentC extends Fragment {
         barChart.getAxisRight().setEnabled(false);
         //x轴显示到下面
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        barChart.getXAxis().setTextColor(Color.BLUE);//设置X轴字体颜色
+
+        barChart.getXAxis().setTextSize(12f); //设置X轴字体大小
         //装载数据
         barChart.setData(data);
-        barChart.animateY(2000);
+        barChart.animateY(300);
         //设置右下角表文字
         barChart.setDescription("");
         //设置文字字号
-        barChart.setDescriptionTextSize(14f);
+        barChart.setDescriptionTextSize(20f);
         //设置表文字颜色
         barChart.setDescriptionColor(Color.BLACK);
+        barChart.setDrawBorders(true);
         //设置比例图
         Legend mLegend = barChart.getLegend();
         //mLegend.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);//设置显示位置

@@ -99,6 +99,7 @@ public class ReviseActivity extends AppCompatActivity {
                 Toast.makeText(ReviseActivity.this,"退出！",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ReviseActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

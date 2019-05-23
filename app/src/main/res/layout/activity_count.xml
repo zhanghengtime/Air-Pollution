@@ -36,15 +36,5 @@
         android:textColor="#fff"
         android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btn_count_esc"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="200dp"
-        android:background="@drawable/anliu_1"
-        android:hint="退出"
-        android:textColor="#fff"
-        android:textSize="20sp" />
 
 </RelativeLayout>

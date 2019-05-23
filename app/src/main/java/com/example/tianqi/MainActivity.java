@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"查询模块！",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, FindActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
         mBtnread.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"管理模块！",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, ManageActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
         mBtnmap.setOnClickListener(new View.OnClickListener() {

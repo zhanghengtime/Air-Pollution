@@ -84,11 +84,11 @@ public class readFragmentB extends Fragment {
         // y轴的数据随机房价
         ArrayList<Entry> yValues = new ArrayList<Entry>();
         for (int i = 0; i < count; i++) {
-            float value = (float) (Math.random() * range*10) + 6000;
+            float value = (float) ((Math.random() * range*10)%300) + 100;
             yValues.add(new Entry(value, i));
         }
         // y轴的数据集合
-        LineDataSet lineDataSet = new LineDataSet(yValues, "2016 房价走势图 " /*显示在比例图上*/);
+        LineDataSet lineDataSet = new LineDataSet(yValues, "2019 污染走势图 " /*显示在比例图上*/);
         lineDataSet.setValueTextColor(Color.WHITE);
         //用y轴的集合来设置参数
         lineDataSet.setLineWidth(1.75f); //线宽

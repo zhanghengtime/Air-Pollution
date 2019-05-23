@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.format.Time;
 import android.text.method.ScrollingMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -29,6 +31,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -91,7 +94,13 @@ public class BaseActivity extends AppCompatActivity implements MainHandlerConsta
         mTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDateDialog(DateUtil.getDateForString("2019-05-04"));
+                Time t=new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料
+                t.setToNow(); // 取得系统时间。
+                int year = t.year;
+                int month = t.month+1;
+                int date = t.monthDay;
+                String  mmtimes = year+"-"+month+"-"+date;
+                showDateDialog(DateUtil.getDateForString(mmtimes));
             }
         });
     }

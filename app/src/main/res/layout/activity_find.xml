@@ -15,7 +15,7 @@
         android:textColor="#1A6BE6"
         android:textSize="26sp" />
 
-    <EditText
+    <Spinner
         android:id="@+id/Place"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -23,6 +23,8 @@
         android:layout_marginTop="99dp"
         android:background="@drawable/user_name"
         android:drawablePadding="5dp"
+        android:spinnerMode="dropdown"
+        android:overlapAnchor="false"
         android:hint="区县: "
         android:maxLines="1"
         android:paddingLeft="10dp"
@@ -54,6 +56,8 @@
         android:layout_marginBottom="230dp"
         android:background="@drawable/user_name"
         android:drawablePadding="5dp"
+        android:spinnerMode="dropdown"
+        android:overlapAnchor="false"
         android:maxLines="1"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -63,24 +67,13 @@
     <Button
         android:id="@+id/btn_find"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="144dp"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/anliu_1"
         android:hint="查询"
         android:textColor="#fff"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/btn_find_esc"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="80dp"
-        android:background="@drawable/anliu_1"
-        android:hint="退出"
-        android:textColor="#fff"
-        android:textSize="20sp" />
+        android:textSize="25sp" />
 
 
 </RelativeLayout>
