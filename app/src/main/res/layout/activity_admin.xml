@@ -116,6 +116,7 @@
     </LinearLayout>
     <TextView android:id="@+id/label"
         android:text=" 查询结果："
+        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ScrollView android:layout_width="fill_parent"
@@ -124,6 +125,7 @@
             android:layout_height="wrap_content" android:orientation="vertical">
             <TextView android:id="@+id/display"
                 android:text=""
+                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

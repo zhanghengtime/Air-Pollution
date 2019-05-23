@@ -1,25 +1,35 @@
 package com.example.tianqi;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.tianqi.utils.DBAdapter;
+import com.example.tianqi.utils.MyDBOpenHelper;
 import com.example.tianqi.utils.User;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class AdminActivity extends AppCompatActivity {
     /** Called when the activity is first created. */
-    private DBAdapter dbAdepter ;
     private EditText usernameText;
     private EditText userpwdText;
     private EditText idEntry;
     private TextView labelView;
     private TextView displayView;
     private Button exitbtn;
+    private static Handler handler=new Handler();
+    public String msg="";
+    public String msgs="";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +54,6 @@ public class AdminActivity extends AppCompatActivity {
         queryButton.setOnClickListener(queryButtonListener);
         deleteButton.setOnClickListener(deleteButtonListener);
         updateButton.setOnClickListener(updateButtonListener);
-        dbAdepter = new DBAdapter(this);
-        dbAdepter.open();
         exitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,86 +63,275 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
     }
+    /**
+     * 添加数据
+     */
     View.OnClickListener addButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            User user = new User();
-            user.username = usernameText.getText().toString();
-            user.userpwd = userpwdText.getText().toString();
-            long colunm = dbAdepter.insert(user);
-            if (colunm == -1 ){
-                labelView.setText("添加过程错误！");
-            } else {
-                labelView.setText("成功添加数据，ID："+String.valueOf(colunm));
-            }
+            new  Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        Connection conn = MyDBOpenHelper.getConn();
+                        if(conn!=null){
+                            Log.d("调试","连接成功");
+                            Statement stmt = conn.createStatement();
+                            String sql = "select * from user " + "where Username =\"" + usernameText.getText().toString() + "\"";
+                            ResultSet rs = stmt.executeQuery(sql);
+                            if(rs.next()) {
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(), "用户名已经存在！", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }else
+                            {
+                                String sqls = "insert into user (Username, Password) values (\"" + usernameText.getText().toString() + "\" , \"" + userpwdText.getText().toString() +"\")";
+                                stmt.executeUpdate(sqls);
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        displayView.setText("成功添加数据!");
+                                    }
+                                });
+                            }
+                        }else{
+                            Log.d("调试","连接失败");
+                        }
+                    }catch (SQLException e){
+                        Log.i("debug",Log.getStackTraceString(e));
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                displayView.setText("添加过程错误！");
+                            }
+                        });
+                    }
+                }
+            }).start();
         }
     };
+    /**
+     * 全部显示
+     */
     View.OnClickListener queryAllButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            User[] users = dbAdepter.queryAllData();
-            if (users == null){
-                labelView.setText("数据库中没有数据");
-                return;
-            }
-            labelView.setText("数据库：");
-            String msg = "";
-            for (int i = 0 ; i<users.length; i++){
-                msg += users[i].toString()+"\n";
-            }
-            displayView.setText(msg);
+            new  Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        msg="";
+                        Connection conn = MyDBOpenHelper.getConn();
+                        if(conn!=null){
+                            Log.d("调试","连接成功");
+                            Statement stmt = conn.createStatement();
+                            String sql = "select * from user where flag=0";
+                            ResultSet rs = stmt.executeQuery(sql);
+                            msg += "ID       用户名        密码 \n";
+                            while(rs.next()) {
+                               msg += rs.getString(4)+ "  ,  " + rs.getString(1)+"  ,  "+rs.getString(2)+"\n";
+                            }
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if(msg.equals("ID       用户名        密码 \n"))
+                                    {
+                                        displayView.setText("数据库中没有数据");
+                                    }else {
+                                        displayView.setText(msg);
+                                    }
+                                }
+                            });
+                        }else{
+                            Log.d("调试","连接失败");
+                        }
+                    }catch (SQLException e){
+                        Log.i("debug",Log.getStackTraceString(e));
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                displayView.setText("系统错误！");
+                            }
+                        });
+                    }
+                }
+            }).start();
         }
     };
+    /**
+     * 清除显示
+     */
     View.OnClickListener clearButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            msg="";
+            msgs="";
             displayView.setText("");
         }
     };
+    /**
+     * 删除所有普通用户
+     */
     View.OnClickListener deleteAllButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            dbAdepter.deleteAllData();
-            String msg = "数据全部删除";
-            labelView.setText(msg);
+            new  Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        Connection conn = MyDBOpenHelper.getConn();
+                        if(conn!=null){
+                            Log.d("调试","连接成功");
+                            Statement stmt = conn.createStatement();
+                            String sql = "delete from user where flag=0";
+                            stmt.executeUpdate(sql);
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    displayView.setText("成功删除全部数据!");
+                                }
+                            });
+                        }else{
+                            Log.d("调试","连接失败");
+                        }
+                    }catch (SQLException e){
+                        Log.i("debug",Log.getStackTraceString(e));
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                displayView.setText("系统错误！");
+                            }
+                        });
+                    }
+                }
+            }).start();
         }
     };
+    /**
+     * ID查询
+     */
     View.OnClickListener queryButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            int id = Integer.parseInt(idEntry.getText().toString());
-            User[] users = dbAdepter.queryOneData(id);
-            if (users == null){
-                labelView.setText("数据库中没有ID为"+String.valueOf(id)+"的数 据");
-                return;
-            }
-            labelView.setText("数据库：");
-            displayView.setText(users[0].toString());
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Connection conn = MyDBOpenHelper.getConn();
+                        if (conn != null) {
+                            msgs = "";
+                            Log.d("调试", "连接成功");
+                            Statement stmt = conn.createStatement();
+                            String sql = "select * from user where Id=\"" + idEntry.getText().toString() + "\"";
+                            ResultSet rs = stmt.executeQuery(sql);
+                            if (rs.next()) {
+                                msgs += rs.getString(1) + " , " + rs.getString(2) + "\n";
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        displayView.setText(msgs);
+                                    }
+                                });
+                            } else {
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        displayView.setText("数据库中没有ID为" + idEntry.getText().toString() + "的数据");
+                                    }
+                                });
+                            }
+                        } else {
+                            Log.d("调试", "连接失败");
+                        }
+                    } catch (SQLException e) {
+                        Log.i("debug", Log.getStackTraceString(e));
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                displayView.setText("系统错误！");
+                            }
+                        });
+                    }
+                }
+            }).start();
         }
     };
+    /**
+     * ID删除
+     */
     View.OnClickListener deleteButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            long id = Integer.parseInt(idEntry.getText().toString());
-            long result = dbAdepter.deleteOneData(id);
-            String msg = "删除ID为"+idEntry.getText().toString()+"的数据" +
-                    (result>0?"成功":"失败");
-            labelView.setText(msg);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Connection conn = MyDBOpenHelper.getConn();
+                        if (conn != null) {
+                            msgs = "";
+                            Log.d("调试", "连接成功");
+                            Statement stmt = conn.createStatement();
+                            String sql = "delete from user where Id=\"" + idEntry.getText().toString() + "\"";
+                            stmt.executeUpdate(sql);
+                            handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        displayView.setText("数据库中ID为" + idEntry.getText().toString() + "的数据已删除!");
+                                    }
+                                });
+                        } else {
+                            Log.d("调试", "连接失败");
+                        }
+                    } catch (SQLException e) {
+                        Log.i("debug", Log.getStackTraceString(e));
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                displayView.setText("系统错误！");
+                            }
+                        });
+                    }
+                }
+            }).start();
         }
     };
     View.OnClickListener updateButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            User user = new User();
-            user.username = usernameText.getText().toString();
-            user.userpwd = userpwdText.getText().toString();
-            long id = Integer.parseInt(idEntry.getText().toString());
-            long count = dbAdepter.updateOneData(id, user);
-            if (count == -1 ){
-                labelView.setText("更新错误！");
-            } else {
-                labelView.setText("更新成功，更新数据"+String.valueOf(count)+" 条");
-            }
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Connection conn = MyDBOpenHelper.getConn();
+                        if (conn != null) {
+                            msgs = "";
+                            Log.d("调试", "连接成功");
+                            Statement stmt = conn.createStatement();
+                            String sql = "update user set Username=\"" + usernameText.getText().toString() + "\" , Password= \"" + userpwdText.getText().toString() + "\" where Id=\"" + idEntry.getText().toString() + "\"";
+                            stmt.executeUpdate(sql);
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    displayView.setText("数据库中ID为" + idEntry.getText().toString() + "的数据已更新!");
+                                }
+                            });
+                        } else {
+                            Log.d("调试", "连接失败");
+                        }
+                    } catch (SQLException e) {
+                        Log.i("debug", Log.getStackTraceString(e));
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                displayView.setText("系统错误!");
+                            }
+                        });
+                    }
+                }
+            }).start();
         }
     };
 }
