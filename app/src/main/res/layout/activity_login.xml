@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dip"
             android:gravity="center"
-            android:text="大气监测系统"
+            android:text="大气监测数据管理系统"
             android:textColor="#ffffff"
             android:textSize="24sp" />
 

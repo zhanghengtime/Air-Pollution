@@ -143,20 +143,23 @@ public class BaseActivity extends AppCompatActivity implements MainHandlerConsta
                                     result += "区县: " + rs.getString(4) + " \n";
                                //result += "经度: " + rs.getString(5) + " \n";
                                // result += "纬度:" + rs.getString(6) + " \n";
-                                result += "时间: " + rs.getString(7) + " ,\n";
                                 result += "首要污染物: " + rs.getString(15) + " ,\n";
                                 result += "空气质量指数(AQI): " + rs.getString(8) + "\n";
                                 if(Float.parseFloat(rs.getString(8))>300)
                                 {
                                     result+="提示:此空气状况健康人群运动耐受力降低，老年人和病人应停留在室内，避免体力消耗，一般人群避免户外活动。\n\n";
-                                }else if(Float.parseFloat(rs.getString(8))>200)
-                                {
+                                }else if(Float.parseFloat(rs.getString(8))>200) {
                                     result+="提示:此空气状况心脏病和肺病患者症状显著加剧，运动耐受力降低，儿童、老年人及心脏病、肺病患者应停留在室内，停止户外运动，一般人群减少户外运动。\n\n";
-                                }else if(Float.parseFloat(rs.getString(8))>150)
-                                {
+                                }else if(Float.parseFloat(rs.getString(8))>150) {
                                     result+="提示:此空气状况可能对健康人群心脏、呼吸系统有影响，儿童、老年人及心脏病、呼吸系统疾病患者避免长时间、高强度的户外锻炼，一般人群适量减少户外运动。\n\n";
-                                }else{
+                                }else if(Float.parseFloat(rs.getString(8))>100) {
                                     result+="提示:此空气状况健康人群出现刺激症状，儿童、老年人及心脏病、呼吸系统疾病患者应减少长时间、高强度的户外锻炼。\n\n";
+                                }
+                                else if(Float.parseFloat(rs.getString(8))>50){
+                                    result+="提示:空气质量较好，极少数敏感人群应减少户外活动。\n\n";
+                                }
+                                else {
+                                    result+="提示:空气质量优，基本无空气污染,各类人群可正常活动。\n\n";
                                 }
                                // result += "PM10: " + rs.getString(9) + " ,\n";
                                // result += "PM2.5: " + rs.getString(10) + " ,\n";
@@ -199,7 +202,7 @@ public class BaseActivity extends AppCompatActivity implements MainHandlerConsta
                                             mInput.setText(strr);
                                         }
                                         else{
-                                            mInput.setText("暂无信息!");
+                                            mInput.setText("此时间暂无污染超标信息!");
                                         }
                                     }
                                 });

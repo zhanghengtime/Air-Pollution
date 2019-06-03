@@ -41,7 +41,6 @@ public class AddActivity extends AppCompatActivity {
     private EditText etCount16;
     private EditText etCount17;
     private Button mBtnadd;
-    private Button mEsc;
     private Dialog dateDialog;
     private static Handler handler=new Handler();
     private String eTime;
@@ -51,7 +50,6 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_count_add);
         mBtnadd = (Button) findViewById(R.id.btn_count_add1);
-        mEsc = (Button) findViewById(R.id.btn_count_add_esc);
         etCount1 = findViewById(R.id.et_count_1);
         etCount2 = findViewById(R.id.et_count_2);
         etCount3 = findViewById(R.id.et_count_3);
@@ -168,15 +166,6 @@ public class AddActivity extends AppCompatActivity {
                 int date = t.monthDay;
                 String  mmtimes = year+"-"+month+"-"+date;
                 showDateDialog(DateUtil.getDateForString(mmtimes));
-            }
-        });
-        mEsc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(AddActivity.this,"退出！",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(AddActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
             }
         });
     }

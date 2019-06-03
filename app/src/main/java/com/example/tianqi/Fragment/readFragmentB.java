@@ -32,7 +32,7 @@ public class readFragmentB extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         mLineChart = view.findViewById(R.id.spread_line_chart);
-        LineData mLineData = getLineData(12, 100);
+        LineData mLineData = getLineData();
         showChart(mLineChart, mLineData, Color.GRAY);
     }
 
@@ -70,23 +70,21 @@ public class readFragmentB extends Fragment {
     }
 
     /**
-     * 生成一个数据
-     * @param count 表示图表中有多少个坐标点
-     * @param range 用来生成range以内的随机数
-     * @return
+     * 数据
      */
-    private LineData getLineData(int count, float range) {
+    private LineData getLineData() {
         ArrayList<String> xValues = new ArrayList<String>();
-        for (int i = 0; i < count; i++) {
-            // x轴显示的数据，这里默认使用数字下标显示
-            xValues.add(1 + i+"月");
-        }
-        // y轴的数据随机房价
+       xValues.add("上上次");
+        xValues.add("上次");
+        xValues.add("这次");
         ArrayList<Entry> yValues = new ArrayList<Entry>();
-        for (int i = 0; i < count; i++) {
-            float value = (float) ((Math.random() * range*10)%300) + 100;
-            yValues.add(new Entry(value, i));
-        }
+        float AQI1 = Float.parseFloat(getActivity().getIntent().getStringExtra("t8"));
+        float AQI2 = Float.parseFloat(getActivity().getIntent().getStringExtra("t9"));
+        float AQI3 = Float.parseFloat(getActivity().getIntent().getStringExtra("t10"));
+        yValues.add(new Entry(AQI3, 0));
+        yValues.add(new Entry(AQI2, 1));
+        yValues.add(new Entry(AQI1, 2));
+        // y轴的数据随机房价
         // y轴的数据集合
         LineDataSet lineDataSet = new LineDataSet(yValues, "2019 污染走势图 " /*显示在比例图上*/);
         lineDataSet.setValueTextColor(Color.WHITE);

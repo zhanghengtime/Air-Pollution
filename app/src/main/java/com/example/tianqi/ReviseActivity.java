@@ -22,14 +22,12 @@ public class ReviseActivity extends AppCompatActivity {
     private EditText et_count_gaikind;
     private EditText et_count_1;
     private Button btn_count_revise1;
-    private Button btn_count_revise_esc;
     private static Handler handler=new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_count_revise);
         btn_count_revise1 = (Button) findViewById(R.id.btn_count_revise1);
-        btn_count_revise_esc = (Button) findViewById(R.id.btn_count_revise_esc);
         et_count_1 = findViewById(R.id.et_count_1);
         et_count_gaikind = findViewById(R.id.et_count_gaikind);
         et_count_0 = findViewById(R.id.et_count_0);
@@ -91,15 +89,6 @@ public class ReviseActivity extends AppCompatActivity {
                     }
                 }).start();
 
-            }
-        });
-        btn_count_revise_esc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ReviseActivity.this,"退出！",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ReviseActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
             }
         });
     }

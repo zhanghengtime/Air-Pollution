@@ -25,7 +25,6 @@ public class ManageActivity extends AppCompatActivity {
                 Toast.makeText(ManageActivity.this,"添加模块！",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ManageActivity.this, AddActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
         mBtndelete.setOnClickListener(new View.OnClickListener() {
@@ -34,7 +33,6 @@ public class ManageActivity extends AppCompatActivity {
                 Toast.makeText(ManageActivity.this,"删除模块！",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ManageActivity.this, DeleteActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
         mBtnrevise.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +41,6 @@ public class ManageActivity extends AppCompatActivity {
                 Toast.makeText(ManageActivity.this,"修改模块！",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ManageActivity.this, ReviseActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

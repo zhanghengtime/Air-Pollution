@@ -60,7 +60,6 @@ public class MapActivity extends AppCompatActivity {
     private TextView displayView;
     private static Handler handler=new Handler();
     private Button map_find;
-    private Button map_esc;
     private Spinner mSpinner;
     public String strrr;
     private int flag = 0;
@@ -70,7 +69,6 @@ public class MapActivity extends AppCompatActivity {
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_map);
         map_find = (Button)findViewById(R.id.btn_map_find);
-        map_esc = (Button)findViewById(R.id.btn_map_esc);
         displayView = (TextView)findViewById(R.id.map_results);
         mSpinner = (Spinner) findViewById(R.id.map_places);
 //获取地图控件引用
@@ -135,15 +133,6 @@ public class MapActivity extends AppCompatActivity {
             }
         });
         mLocationClient.start();
-        map_esc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MapActivity.this,"退出！",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MapActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 //开始定位
         map_find.setOnClickListener(new View.OnClickListener() {
             @Override

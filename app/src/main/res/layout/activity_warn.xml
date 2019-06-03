@@ -52,7 +52,7 @@
             android:layout_height="fill_parent"
             android:background="@drawable/anliu_1"
             android:lines="2"
-            android:text="退出"
+            android:text="播放停止"
             android:textSize="20dp" />
 
     </LinearLayout>

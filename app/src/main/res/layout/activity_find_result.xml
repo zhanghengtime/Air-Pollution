@@ -1,46 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <RelativeLayout android:id="@+id/RelativeLayout01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </RelativeLayout>
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/background"
+    android:scrollbars="none"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
 
-    <TextView
-        android:id="@+id/labelss"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="查询结果"
-        android:textSize="30sp" />
-
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="450dp">
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/find_results"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </ScrollView>
-    <Button android:id="@+id/change_chart"
-        android:text="图形化表示"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:textSize="20sp"
-        android:background="@drawable/anliu_1"
-        android:layout_alignParentBottom="true"/>
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            tools:text="城市" />
+        <Button
+            android:id="@+id/change_chart"
+            android:layout_width="100dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:minHeight="0dp"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@drawable/btn"
+            android:onClick="open"
+            android:text="图形化表示" />
+        <TextView
+            android:id="@+id/g_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/city_name"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            tools:text="公历" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="49dp"
+            android:layout_below="@id/g_date"
+            android:gravity="bottom"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="15dp"
+            android:textSize="43sp"
+            tools:text="温度℃" />
+
+        <TextView
+            android:id="@+id/weather"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/g_date"
+            android:gravity="right"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="25dp"
+            android:layout_toRightOf="@id/temperature"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            tools:text="天气" />
+        <TextView
+            android:id="@+id/pm_25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/temperature"
+            android:layout_marginTop="5dp"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            tools:text="PM2.5" />
+        <TextView
+            android:id="@+id/quality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/weather"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            tools:text="空气质量" />
+        <LinearLayout
+            android:id="@+id/l1"
+            android:layout_below="@id/quality"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp"
+            android:orientation="vertical"
+            android:background="#56000000">
+            <TextView
+                android:id="@+id/jianyi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                tools:text="外出建议"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_below="@id/l1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:orientation="vertical"
+            android:background="#56000000">
+            <TextView
+                android:id="@+id/jianyi2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                tools:text="外出建议2"/>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

@@ -46,7 +46,7 @@
         android:name=".DemoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/yun"
-        android:label="大气监测系统"
+        android:label="大气监测数据管理系统"
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/yun"
         android:supportsRtl="true"

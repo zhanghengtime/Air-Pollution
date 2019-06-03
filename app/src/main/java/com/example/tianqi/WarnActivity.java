@@ -103,8 +103,8 @@ public class WarnActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.stop:
                 stop(); // 停止合成引擎
-                startActivity(intent);    //跳转页面
-                finish();     /**         finish() 足以 不需要用Destory()        */
+               // startActivity(intent);    //跳转页面
+               // finish();     /**         finish() 足以 不需要用Destory()        */
                 break;
             default:
                 break;

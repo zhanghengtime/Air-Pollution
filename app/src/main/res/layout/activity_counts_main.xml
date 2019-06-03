@@ -61,31 +61,6 @@
             android:padding="3dip"
             android:layout_weight="1"
             android:background="@drawable/anliu_2"/>
-        <Button
-            android:padding="3dip"
-            android:id="@+id/btn_count_esc001"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_below="@id/btn_login"
-            android:hint="退出"
-            android:gravity="center"
-            android:layout_gravity="right"
-            android:textColorHint="#000"
-            android:textSize="15sp"
-            android:background="@drawable/anliu_2"/>
-    </LinearLayout>
-    <LinearLayout android:id="@+id/LinearLayout003"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-    <TextView android:text="区县："
-        android:layout_width="70dp"
-        android:textSize="20sp"
-        android:layout_height="wrap_content" />
-    <EditText android:id="@+id/et_count_qvxian"
-        android:layout_width="50dip"
-        android:layout_height="50dp"
-        android:padding="3dip"
-        android:layout_weight="1" />
     </LinearLayout>
     <LinearLayout android:id="@+id/LinearLayout004"
         android:layout_width="fill_parent"

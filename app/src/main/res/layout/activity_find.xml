@@ -66,11 +66,12 @@
 
     <Button
         android:id="@+id/btn_find"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"
-        android:background="@drawable/anliu_1"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/btn_shape"
         android:hint="查询"
         android:textColor="#fff"
         android:textSize="25sp" />

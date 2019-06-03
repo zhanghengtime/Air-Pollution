@@ -27,7 +27,7 @@
         android:hint="数据查询"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="40dp"/>
 
     <Button
         android:stateListAnimator="@null"
@@ -39,7 +39,7 @@
         android:hint="数据管理"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="40dp"/>
 
     <Button
         android:stateListAnimator="@null"
@@ -52,7 +52,7 @@
         android:hint="污染物统计"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="40dp"/>
 
     <Button
         android:stateListAnimator="@null"
@@ -61,11 +61,11 @@
         android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:background="@drawable/anliu_1"
-        android:layout_below="@id/btn_main_manage"
+        android:layout_below="@id/btn_main_count"
         android:hint="污染物预警"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="40dp"/>
 
     <Button
         android:stateListAnimator="@null"
@@ -78,7 +78,7 @@
         android:hint="地图模式"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="40dp"/>
 
 
     <!--设置抽屉控件-->

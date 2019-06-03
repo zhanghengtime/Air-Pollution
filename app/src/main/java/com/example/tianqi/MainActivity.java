@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"地图模式！",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
         mBtncount.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"统计模块！",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, CountActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
         mBtnwarn.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"预警模块！",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, WarnActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

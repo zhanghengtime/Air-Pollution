@@ -24,7 +24,6 @@ public class DeleteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_count_delete);
         mBtndelete1 = (Button) findViewById(R.id.btn_count_delete1);
-        mBtndelete_esc = (Button) findViewById(R.id.btn_count_delete_esc);
         etshankind = findViewById(R.id.et_count_shankind);
         mBtndelete1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,15 +83,6 @@ public class DeleteActivity extends AppCompatActivity {
                     }
                 }).start();
 
-            }
-        });
-        mBtndelete_esc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(DeleteActivity.this,"退出！",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(DeleteActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
             }
         });
     }
