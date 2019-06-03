@@ -26,7 +26,6 @@ public class AdminActivity extends AppCompatActivity {
     private EditText idEntry;
     private TextView labelView;
     private TextView displayView;
-    private Button exitbtn;
     private static Handler handler=new Handler();
     public String msg="";
     public String msgs="";
@@ -34,7 +33,6 @@ public class AdminActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-        exitbtn = (Button) findViewById(R.id.btn_exit2);
         usernameText = (EditText)findViewById(R.id.username);
         userpwdText = (EditText)findViewById(R.id.userpwd);
         idEntry = (EditText)findViewById(R.id.id_entry);
@@ -54,14 +52,6 @@ public class AdminActivity extends AppCompatActivity {
         queryButton.setOnClickListener(queryButtonListener);
         deleteButton.setOnClickListener(deleteButtonListener);
         updateButton.setOnClickListener(updateButtonListener);
-        exitbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AdminActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
     /**
      * 添加数据

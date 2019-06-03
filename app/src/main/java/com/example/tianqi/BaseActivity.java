@@ -77,6 +77,13 @@ public class BaseActivity extends AppCompatActivity implements MainHandlerConsta
         };
         initialView(); // 初始化UI
         initPermission(); // android 6.0以上动态权限申请
+        Time t=new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料
+        t.setToNow(); // 取得系统时间。
+        int year = t.year;
+        int month = t.month+1;
+        int date = t.monthDay;
+        String  mmtimes = year+"-"+month+"-"+date;
+        showDateDialog(DateUtil.getDateForString(mmtimes));
     }
 
 
@@ -135,7 +142,7 @@ public class BaseActivity extends AppCompatActivity implements MainHandlerConsta
                             }
                         });*/
                                 ResultSet rs = stmt.executeQuery(sql);
-                                String result="";
+                                String result="可能污染区域如下:\n\n";
                                 while(rs.next()&&flag<3) {
                                     //result += "站点名称：" + rs.getString(1)+ " \n";
                                     // result += "设备类型：" + rs.getString(2) + " \n";
@@ -198,7 +205,7 @@ public class BaseActivity extends AppCompatActivity implements MainHandlerConsta
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        if(!(strr.equals(""))) {
+                                        if(!(strr.equals("可能污染区域如下:\n\n"))) {
                                             mInput.setText(strr);
                                         }
                                         else{

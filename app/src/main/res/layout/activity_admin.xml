@@ -101,18 +101,6 @@
             android:padding="3dip"
             android:layout_weight="1"
             android:background="@drawable/anliu_1"/>
-        <Button
-            android:padding="3dip"
-            android:id="@+id/btn_exit2"
-            android:layout_width="40dp"
-            android:layout_height="48dp"
-            android:layout_below="@id/btn_login"
-            android:hint="退出"
-            android:gravity="center"
-            android:layout_gravity="right"
-            android:textColorHint="#000"
-            android:textSize="15sp"
-            android:background="@drawable/anliu_1"/>
     </LinearLayout>
     <TextView android:id="@+id/label"
         android:text=" 查询结果："
